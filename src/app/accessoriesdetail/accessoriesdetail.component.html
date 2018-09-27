@@ -1,0 +1,54 @@
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+    <div fxFlex="40" *ngIf="selectedProduct">
+      <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <h3>{{selectedProduct.name | uppercase}}</h3> <!-- pipe | uppercase makes name of the product to all uppercase-->
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <img height="325px" width=auto src={{selectedProduct.image}} alt={{selectedProduct.name}}>
+            <p>
+              {{selectedProduct.description}}
+            </p>
+           </mat-card-content>
+           <mat-divider></mat-divider>
+          <mat-card-actions>
+            <button mat-button (click) = "goBack()">PREVIOUS</button>
+            <button mat-button>BUY</button>
+            <button mat-button>ADD TO CART</button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+    <div fxFlex="40" *ngIf="selectedProduct">
+      <div>
+        <h3>Feedbacks</h3>
+      </div>
+      <mat-card *ngFor="let theproduct of selectedProduct.feedbacks">
+      <mat-card-content>
+      <p>
+      Comment: {{theproduct.comment}}
+      </p>
+      <p matline>
+          <span *ngFor="let c of ReviewCount(theproduct.rating)">
+            <mat-icon>star</mat-icon>
+          </span>
+        </p>
+      <p>
+      Author: {{theproduct.author}} - {{theproduct.date | date}} <!-- pipe | date change the date format to medium date-->
+      </p>
+    </mat-card-content>
+    </mat-card>
+    </div>
+
+  
+</div>
